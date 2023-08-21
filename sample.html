@@ -1,0 +1,46 @@
+
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Audio Effects SDK Web - integration sample</title>
+  <meta name="description" content="Effects SDK Web - integration sample">
+
+</head>
+
+<body>
+    <video id="testVideo" controls width="720" autoplay></video>
+    <script crossorigin="anonymous" src="https://effectssdk.com/sdk/audio/dist/atsvb-web-v1.2.5.js"></script>
+    
+    <script>
+    
+        const sdk = new window.atsvb('{{CUSTOMER_ID}}');
+
+        console.log(sdk);
+        
+        let video = document.getElementById('testVideo');
+    
+        sdk.onReady = () => {
+            console.log('SDK is ready let\'s run it');
+            //the output stream can be requested only after SDK is ready
+            video.srcObject = sdk.getStream();
+            sdk.run();
+        }
+    
+        window.addEventListener('load', function () {
+            sdk.clear();
+            navigator.mediaDevices.getUserMedia({ video: {
+                    width: 1280,
+                    height: 720
+                }, audio: true }).then(stream => {
+                //set stream to sdk
+                sdk.useStream(stream);
+            });
+        })
+    
+    </script>
+</body>
+</html>
