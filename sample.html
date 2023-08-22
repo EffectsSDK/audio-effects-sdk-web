@@ -13,7 +13,7 @@
 
 <body>
     <video id="testVideo" controls width="720" autoplay></video>
-    <script crossorigin="anonymous" src="https://effectssdk.com/sdk/audio/dist/atsvb-web-v1.2.5.js"></script>
+    <script crossorigin="anonymous" src="https://effectssdk.com/sdk/audio/dist/atsvb-web-v1.2.9.js"></script>
     
     <script>
     
@@ -27,15 +27,13 @@
             console.log('SDK is ready let\'s run it');
             //the output stream can be requested only after SDK is ready
             video.srcObject = sdk.getStream();
+            //sdk.setPreset('quality');
             sdk.run();
         }
     
         window.addEventListener('load', function () {
             sdk.clear();
-            navigator.mediaDevices.getUserMedia({ video: {
-                    width: 1280,
-                    height: 720
-                }, audio: true }).then(stream => {
+            navigator.mediaDevices.getUserMedia({ video:false, audio: true }).then(stream => {
                 //set stream to sdk
                 sdk.useStream(stream);
             });
