@@ -13,12 +13,11 @@
 
 <body>
     <video id="testVideo" controls width="720" autoplay></video>
-    <script crossorigin="anonymous" src="https://effectssdk.com/sdk/audio/dist/atsvb-web-v1.2.9.js"></script>
+    <script crossorigin="anonymous" src="https://effectssdk.com/sdk/audio/dist/atsvb-web-v1.2.10.js"></script>
     
     <script>
     
         const sdk = new window.atsvb('{{CUSTOMER_ID}}');
-
         console.log(sdk);
         
         let video = document.getElementById('testVideo');
@@ -30,6 +29,10 @@
             //sdk.setPreset('quality');
             sdk.run();
         }
+
+        sdk.onUnableToProcessLive = () => {
+            console.log("SDK unable to process stream in real-time!");
+        };
     
         window.addEventListener('load', function () {
             sdk.clear();
