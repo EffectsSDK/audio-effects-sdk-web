@@ -1,4 +1,3 @@
-
 <!doctype html>
 
 <html lang="en">
@@ -13,35 +12,50 @@
 
 <body>
     <video id="testVideo" controls width="720" autoplay></video>
-    <script crossorigin="anonymous" src="https://effectssdk.com/sdk/audio/dist/atsvb-web-v1.2.10.js"></script>
-    
+    <!-- Check the latest releases and use the appropriate version of SDK-->
+    <script crossorigin="anonymous" src="https://effectssdk.ai/sdk/audio/dev/2.1.6/atsvb-web.js"></script>
+
     <script>
-    
+   
         const sdk = new window.atsvb('{{CUSTOMER_ID}}');
-        console.log(sdk);
-        
+
+        sdk.config({
+            preset: 'balanced',
+            sample_rate: 32000
+        });
+
+        sdk.preload();
+
+        sdk.onError((e) => {
+            switch (e.type) {
+                case 'error':
+                console.error(e.message);
+                // console.error(e.cause);
+                break;
+
+                case 'info':
+                console.log(e.message);
+                break;
+            }
+        });
+
         let video = document.getElementById('testVideo');
-    
+   
         sdk.onReady = () => {
             console.log('SDK is ready let\'s run it');
             //the output stream can be requested only after SDK is ready
             video.srcObject = sdk.getStream();
-            //sdk.setPreset('quality');
             sdk.run();
-        }
-
-        sdk.onUnableToProcessLive = () => {
-            console.log("SDK unable to process stream in real-time!");
         };
-    
+
+   
         window.addEventListener('load', function () {
-            sdk.clear();
             navigator.mediaDevices.getUserMedia({ video:false, audio: true }).then(stream => {
                 //set stream to sdk
                 sdk.useStream(stream);
             });
-        })
-    
+        });
+
     </script>
 </body>
 </html>
