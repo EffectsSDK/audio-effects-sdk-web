@@ -24,12 +24,12 @@ For most users, we recommend the Balanced preset, particularly with a sample rat
 ## Obtaining Effects SDK Customer ID
 Effects SDK Customer ID is required to get SDK working.
 
-To receive a new trial Customer ID please fill in the contact form on [effectssdk.com](https://effectssdk.ai/request-trial) website.
+To receive a new trial Customer ID please fill in the contact form on [effectssdk.ai](https://effectssdk.ai/request-trial) website.
 
 ## Technical Details
 
 - CUSTOMER_ID should be provided to the SDK constructor.
-- SDK has 2 speed/quality presets (different ML models).
+- SDK has 3 speed/quality presets (different ML models).
 
 ## Features
 
