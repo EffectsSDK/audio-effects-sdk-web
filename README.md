@@ -1,5 +1,5 @@
 # Audio Effects SDK - Web Integration Sample
-Add real-time AI audio denoise and echo cancellation to your product in a hour. 
+Add real-time AI audio denoise to your product in a hour. 
 
 ## Requirements
 
@@ -29,9 +29,8 @@ To receive a new trial Customer ID please fill in the contact form on [effectssd
 ## Technical Details
 
 - CUSTOMER_ID should be provided to the SDK constructor.
-- SDK has 2 speed/quality presets (different ML models).
+- SDK has 3 speed/balanced/quality presets (different ML models).
 
 ## Features
 
 - AI Denoise - **implemented**
-- Echo Cancellation - **implemented**
