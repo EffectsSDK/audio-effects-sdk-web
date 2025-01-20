@@ -1,0 +1,62 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Audio Effects SDK Web - Simple Usage Sample</title>
+  <meta name="description" content="Real-time AI-powered noise suppression solution, designed to work seamlessly across all browsers. For Video Conferencing, Live Sreaming and Recording solutions.">
+
+</head>
+
+<body>
+    <audio id="audioElement" controls autoplay></audio>
+
+    <!-- Check the latest releases and use the appropriate version of SDK-->
+    <script src="https://effectssdk.ai/sdk/audio/dev/2.4.1/atsvb-web.js"></script>
+
+    <script>
+   
+        const sdk = new window.atsvb('{CUSTOMER_ID}');
+
+        sdk.config({
+            preset: 'balanced',
+            sample_rate: 32000
+        });
+
+        sdk.preload();
+
+        sdk.onError((e) => {
+            switch (e.type) {
+                case 'error':
+                console.error(e.message);
+                // console.error(e.cause);
+                break;
+
+                case 'info':
+                console.log(e.message);
+                break;
+            }
+        });
+
+        let audio = document.getElementById('audioElement');
+   
+        sdk.onReady = () => {
+            console.log('SDK is ready let\'s run it');
+            //the output stream can be requested only after SDK is ready
+            audio.srcObject = sdk.getStream();
+            sdk.run();
+        };
+
+   
+        window.addEventListener('load', function () {
+            navigator.mediaDevices.getUserMedia({ video:false, audio: true }).then(stream => {
+                //set stream to sdk
+                sdk.useStream(stream);
+            });
+        });
+
+    </script>
+</body>
+</html>
