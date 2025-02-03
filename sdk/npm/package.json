@@ -1,6 +1,6 @@
 {
   "name": "audio-effects-sdk",
-  "version": "2.4.2",
+  "version": "2.4.3",
   "description": "Real-time AI-powered noise suppression solution, designed to work seamlessly across all browsers. For Video Conferencing, Live Sreaming and Recording solutions.",
   "main": "./atsvb.cjs",
   "module": "./atsvb.mjs",
