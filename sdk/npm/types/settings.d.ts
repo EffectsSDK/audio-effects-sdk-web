@@ -25,6 +25,8 @@ export interface Config {
     };
     cacheModels: boolean;
     processingChunk: number;
+    workletPath: string;
+    workerPath: string;
 }
 export declare class DefaultConfig {
     static VERSION: string;
@@ -44,6 +46,8 @@ export declare class DefaultConfig {
     static PRESETS: {
         [model in ModelType]: string;
     };
+    static WORKLET_PATH: string;
+    static WORKER_PATH: string;
     static getConfig(): Config;
     static setConfig(config: Config): void;
     static getModelUrl(model: string): string;

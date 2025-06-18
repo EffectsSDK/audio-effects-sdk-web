@@ -21,7 +21,11 @@ declare type ErrorObjectLight = Omit<ErrorObject, "type"> & {
 };
 export declare enum ErrorCode {
     PERFORMANCE_STOP = 1001,
-    REDUCE_LATENCY = 1002
+    REDUCE_LATENCY = 1002,
+    MODEL_LOAD_FAILED = 1010,
+    PROCESSOR_INIT_ISSUE = 1020,
+    AUTH_ISSUE = 1030,
+    SUPPORT_ISSUE = 1040
 }
 export declare enum ErrorType {
     INFO = "info",

@@ -120,9 +120,6 @@ window.addEventListener('load', function () {
 
 ```
 
-
-
-
 ## Documentation
 - [API Reference](https://effectssdk.ai/sdk/audio/docs/classes/atsvb.html)
 - [Technical Details](docs/Technical-Details.md)

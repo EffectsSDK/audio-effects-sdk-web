@@ -24,9 +24,38 @@
 
 ## Error Handling
 
+```javascript
+// The type you receive in the onError callback
+export interface ErrorObject {
+  message: string;
+  type: ErrorType;
+  code?: ErrorCode;
+  emitter?: ErrorEmitter;
+  cause?: Error;
+  data?: any;
+}
+
+export enum ErrorCode {
+  PERFORMANCE_STOP     = 1001, // SDK stopped because latency exceeded 1 second
+  REDUCE_LATENCY       = 1002, // SDK sped up audio (up to 20%) to reduce latency
+  MODEL_LOAD_FAILED    = 1010, // Failed to load model (e.g. network error)
+  PROCESSOR_INIT_ISSUE = 1020, // Failed to initialize processing module
+  AUTH_ISSUE           = 1030, // Session server activation failed
+  SUPPORT_ISSUE        = 1040, // SIMD support required by the “Balanced” preset is missing
+}
+```
+
 The SDK provides an onError callback, where you can receive information about errors or the current state of the SDK.
 Here are the key points to monitor:
 
-1. Output audio speedup message - This is a normal occurrence where the SDK adjusts latency if it becomes too high.
+1. Output audio speed-up (REDUCE_LATENCY) 
+   
+  - This is a normal response when latency creeps above your threshold. The SDK accelerates some chunks (up to 20%) to keep things in sync.
 
-2. SDK processing stopped - This happens when latency is too high, and the SDK is unable to process audio in real time. In such cases, the original audio will automatically pass through to the output.
+2. SDK processing stopped (PERFORMANCE_STOP)
+
+  - Occurs when latency exceeds 1 second continuously, so the SDK can no longer process in real time.
+  - In this case, incoming audio is passed through untouched.
+  - Currently we are stopping the SDK if latency more than a second
+  - Often transient resource spikes trigger it - consider retrying: wait ~2 seconds, then call sdk.run() again.
+     
