@@ -7,6 +7,7 @@ export declare class Settings {
     static SAMPLE_RATE: number;
     static PROCESSING_CHUNK_MS: number;
     static CUSTOMER_ID: string;
+    static PROCESSOR_TYPE: ProcessorType;
 }
 export interface Config {
     version: string;
@@ -27,6 +28,7 @@ export interface Config {
     processingChunk: number;
     workletPath: string;
     workerPath: string;
+    processorType: ProcessorType;
 }
 export declare class DefaultConfig {
     static VERSION: string;
@@ -48,6 +50,7 @@ export declare class DefaultConfig {
     };
     static WORKLET_PATH: string;
     static WORKER_PATH: string;
+    static PROCESSOR_TYPE: ProcessorType;
     static getConfig(): Config;
     static setConfig(config: Config): void;
     static getModelUrl(model: string): string;
@@ -57,3 +60,4 @@ export declare class DefaultConfig {
     static setVersion(): void;
 }
 export declare type ModelType = "speed" | "balanced" | "quality";
+export declare type ProcessorType = "worklet" | "buffer";

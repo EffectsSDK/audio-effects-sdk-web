@@ -22,6 +22,7 @@ export declare class atsvb {
     getCustomerId(): string;
     getStream(): MediaStream;
     getAudioTrack(): MediaStreamAudioTrack;
+    processBuffer(inputBuffer: Float32Array, sampleRate: number): Promise<Float32Array>;
     clear(): void;
     run(): void;
     stop(): void;

@@ -25,7 +25,8 @@ export declare enum ErrorCode {
     MODEL_LOAD_FAILED = 1010,
     PROCESSOR_INIT_ISSUE = 1020,
     AUTH_ISSUE = 1030,
-    SUPPORT_ISSUE = 1040
+    SUPPORT_ISSUE = 1040,
+    PROCESSING_PROGRESS = 1060
 }
 export declare enum ErrorType {
     INFO = "info",
