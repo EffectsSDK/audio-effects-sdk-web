@@ -16,7 +16,8 @@ Experience flawless audio with our real-time AI-powered noise suppression soluti
 - [Background Noise Remover - Chrome Extension](https://chromewebstore.google.com/detail/background-noise-remover/njmhcidcdbaannpafjdljminaigdgolj)
 
 ## Simple Demo with Playback to Audio Element
-- [Live Demo](https://effectssdk.ai/products/audio-effects-sdk)
+- [Live Demo with Microphone](https://effectssdk.ai/sdk/audio/dev/mic_demo.html)
+- [Live Demo for File Post-Processing](https://effectssdk.ai/sdk/audio/dev/buffer_processing.html)
 
 ## Features
 
