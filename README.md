@@ -13,26 +13,33 @@ Experience flawless audio with our real-time AI-powered noise suppression soluti
 
 
 ## See it in Action
-- [Background Noise Remover - Chrome Extension](https://chromewebstore.google.com/detail/background-noise-remover/njmhcidcdbaannpafjdljminaigdgolj)
+- [Noise Cancelling App - Chrome Extension](https://chromewebstore.google.com/detail/background-noise-remover/njmhcidcdbaannpafjdljminaigdgolj)
+- [Relax Your Ears - Chrome Extension](https://chromewebstore.google.com/detail/relax-your-ears-ai-audio/haalkhejfckbcbheikblbllncbielmke)
 
-## Simple Demo with Playback to Audio Element
-- [Live Demo with Microphone](https://effectssdk.ai/sdk/audio/dev/mic_demo.html)
-- [Live Demo for File Post-Processing](https://effectssdk.ai/sdk/audio/dev/buffer_processing.html)
+## Simple Demo with Mic Playback and Audio/Video Postprocessing
+- [Live Demo with Microphone](https://effectssdk.ai/sdk/audio/dev/mic-demo.html)
+- [Live Demo Studio Sound with Microphone](https://effectssdk.ai/sdk/audio/dev/studio-sound-demo.html)
+- [Live Demo for Audio Post-Processing](https://effectssdk.ai/sdk/audio/dev/audio-file-demo.html)
+- [Live Demo for Video Post-Processing](https://effectssdk.ai/sdk/audio/dev/video-file-demo.html)
 
 ## Features
 
 - Real-time AI-powered noise suppression
+- Studio Sound - audio enhancement with Equalizer, Compressor, Noise Gate, De-Esser, Auto Gain Control, Brickwall Limiter, Metrics
 - Compatible with all major browsers
 - High performance leveraging WebAssembly
 - Multiple presets tailored for various hardware and use cases, balancing speed and quality
 - Supports sample rates: 16K, 32K, 44.1K, 48K
 - Simple and seamless integration
 
+## Studio Sound
+ - [Check out more details](docs/Studio-Sound.md)
+
 ## Trial Evaluation
 
 A Customer ID is required for the Effects SDK.
 
-To receive a new trial Customer ID, please fill out the contact form on the [effectssdk.ai](https://effectssdk.ai/request-trial) website.
+To receive a new trial Customer ID, please fill out the contact form on the [effectssdk.ai](https://effectssdk.ai/cp/registration#audio) website.
 
 ## NPM
 
@@ -66,7 +73,7 @@ sdk.preload();
 
 ## Script Tag
 
-```javascript
+```html
 <script crossorigin="anonymous" src="https://effectssdk.ai/sdk/audio/dev/{VERSION}/atsvb-web.js"></script>
 ```
 

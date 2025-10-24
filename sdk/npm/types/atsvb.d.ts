@@ -1,6 +1,8 @@
 /// <reference types="dom-mediacapture-transform" />
 import { ModelType } from "./settings";
 import { ErrorObject } from "./utils/errorBus";
+import { StudioAudioOptions } from "./utils/enhancer";
+export { StudioAudioOptions, EnhancementOptions, EQPreset } from "./utils/enhancer/types";
 export declare class atsvb {
     onReady?: () => void;
     private _currentInitialization?;
@@ -28,6 +30,15 @@ export declare class atsvb {
     stop(): void;
     suspend(): false | undefined;
     resume(): false | undefined;
+    onStudioAudioMetrics(callback: (metrics: {
+        peak: number;
+        rms: number;
+        peakDb: number;
+        rmsDb: number;
+    }) => void): void;
+    enableStudioSound(): void;
+    disableStudioSound(): void;
+    setStudioSoundOptions(options: StudioAudioOptions): void;
     onError(f: (e: ErrorObject) => void): void;
     private dbg;
 }

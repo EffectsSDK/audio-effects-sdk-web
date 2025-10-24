@@ -29,6 +29,7 @@ export interface Config {
     workletPath: string;
     workerPath: string;
     processorType: ProcessorType;
+    studioSound: boolean;
 }
 export declare class DefaultConfig {
     static VERSION: string;
@@ -51,6 +52,7 @@ export declare class DefaultConfig {
     static WORKLET_PATH: string;
     static WORKER_PATH: string;
     static PROCESSOR_TYPE: ProcessorType;
+    static STUDIO_SOUND: boolean;
     static getConfig(): Config;
     static setConfig(config: Config): void;
     static getModelUrl(model: string): string;
