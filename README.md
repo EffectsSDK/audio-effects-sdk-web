@@ -63,8 +63,8 @@ sdk.config({
   sdk_url: 'https://effectssdk.ai/sdk/audio/',
   //path to wasm files
   wasmPaths: {
-      "ort-wasm.wasm": "https://effectssdk.ai/sdk/audio/dev/{VERSION}/ort-wasm.wasm",
-      "ort-wasm-simd.wasm": "https://effectssdk.ai/sdk/audio/dev/{VERSION}/ort-wasm-simd.wasm"
+      "ort-wasm.wasm": "https://effectssdk.ai/sdk/audio/dev/{SDK_VERSION}/ort-wasm.wasm",
+      "ort-wasm-simd.wasm": "https://effectssdk.ai/sdk/audio/dev/{SDK_VERSION}/ort-wasm-simd.wasm"
   },
 });
 
@@ -74,7 +74,7 @@ sdk.preload();
 ## Script Tag
 
 ```html
-<script crossorigin="anonymous" src="https://effectssdk.ai/sdk/audio/dev/{VERSION}/atsvb-web.js"></script>
+<script crossorigin="anonymous" src="https://effectssdk.ai/sdk/audio/dev/{SDK_VERSION}/atsvb-web.js"></script>
 ```
 
 Usage of script tag instance:
