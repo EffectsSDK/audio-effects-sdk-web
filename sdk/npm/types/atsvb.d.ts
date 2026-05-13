@@ -30,6 +30,9 @@ export declare class atsvb {
     stop(): void;
     suspend(): false | undefined;
     resume(): false | undefined;
+    isRunning(): boolean;
+    getLatencyMs(): number;
+    getSpeedupDebugInfo(): any;
     onStudioAudioMetrics(callback: (metrics: {
         peak: number;
         rms: number;
