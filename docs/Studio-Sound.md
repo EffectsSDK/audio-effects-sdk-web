@@ -162,10 +162,10 @@ Studio Sound provides the following audio processing features:
   - `-40 dB`: Heavy reduction
 
 **Technical Details:**
-- Envelope follower: 1ms attack, 300ms release (measures average level, not peaks)
+- Envelope follower: 1ms attack, 200ms release (measures average level, not peaks)
 - Hysteresis: ±3 dB prevents gate chattering on/off
-- Soft knee ratio: 1.4 for natural sound
-- Gain smoothing: 5ms down, 200ms up (prevents clicks)
+- Soft knee ratio: 1.8 for natural sound
+- Gain smoothing: 5ms down, 120ms up (prevents clicks)
 - **Important**: Threshold is compared to RMS envelope, not peak levels
   - Speech RMS is typically -30 to -20 dBFS during talking
   - Background noise RMS is typically -50 to -35 dBFS
