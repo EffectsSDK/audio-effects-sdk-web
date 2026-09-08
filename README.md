@@ -82,6 +82,51 @@ sdk.config({
 sdk.preload();
 ```
 
+### Pin the SDK version when you self-host assets
+
+If you serve the models and wasm files yourself (`sdk_url` / `wasmPaths` pointing at
+your own host), install an exact version and commit the lockfile:
+
+```terminal
+npm install audio-effects-sdk@2.6.0 --save-exact
+```
+
+```json
+{
+  "dependencies": {
+    "audio-effects-sdk": "2.6.0"
+  }
+}
+```
+
+A range like `^2.6.0` lets the package update on the next clean install. The public
+API stays compatible across such an update - nothing in your integration code breaks -
+but a new version may ship new model or wasm files, and it will request those from
+your asset folder. The old files are still there, the new ones are not, so the SDK
+never finishes loading: no exception reaches the caller and `onReady` simply never
+fires.
+
+The same applies to the script tag - keep the version in the URL rather than pointing
+at a floating "latest" path.
+
+After a deliberate upgrade, copy the new assets from this repository and verify the
+folder with `getRequiredModels()`:
+
+```js
+sdk.config({ sdk_url: 'https://mysite.com/esdk/' });
+
+for (const m of sdk.getRequiredModels()) {
+  const res = await fetch(m.url, { method: 'HEAD' });
+  if (!res.ok) console.error(`missing model for "${m.preset}": ${m.path}`);
+}
+```
+
+Keep the old model files alongside the new ones: they are versioned by name and do
+not collide, so clients still running the previous SDK version keep working.
+
+See [Self Hosted Assets](docs/Self-Hosted-Assets.md) for the full asset layout and
+hosting recommendations.
+
 ## Script Tag
 
 ```html
