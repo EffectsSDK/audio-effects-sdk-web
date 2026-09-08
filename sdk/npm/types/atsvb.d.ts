@@ -1,8 +1,9 @@
 /// <reference types="dom-mediacapture-transform" />
-import { ModelType } from "./settings";
+import { DenoiseStagesOptions, ModelType } from "./settings";
 import { ErrorObject } from "./utils/errorBus";
 import { StudioAudioOptions } from "./utils/enhancer";
 export { StudioAudioOptions, EnhancementOptions, EQPreset } from "./utils/enhancer/types";
+export { DenoiseStagesOptions } from "./settings";
 export declare class atsvb {
     onReady?: () => void;
     private _currentInitialization?;
@@ -20,9 +21,17 @@ export declare class atsvb {
     private setPresetImpl;
     useStream(stream: MediaStream): void;
     setDenoisePower(power: number): void;
+    setDenoiseStages(options: DenoiseStagesOptions): void;
+    getDenoiseStages(): DenoiseStagesOptions | null;
     useAudioTrack(track: MediaStreamTrack): void;
     getCustomerId(): string;
+    getRequiredModels(): Array<{
+        preset: ModelType;
+        path: string;
+        url: string;
+    }>;
     getStream(): MediaStream;
+    getInputAudioTrack(): MediaStreamAudioTrack | null;
     getAudioTrack(): MediaStreamAudioTrack;
     processBuffer(inputBuffer: Float32Array, sampleRate: number): Promise<Float32Array>;
     clear(): void;
@@ -39,9 +48,21 @@ export declare class atsvb {
         peakDb: number;
         rmsDb: number;
     }) => void): void;
+    enableDebugStats(enabled: boolean): void;
+    onDebugStats(callback: (stats: {
+        inputClipCount: number;
+        inputClipPeak: number;
+        outputLimiterCount: number;
+        outputLimiterPeak: number;
+        underrunCount: number;
+        silentFrames: number;
+        speedupCount: number;
+        speedupDroppedMs: number;
+        pipelineGainDb: number | null;
+    }) => void): void;
     enableStudioSound(): void;
     disableStudioSound(): void;
     setStudioSoundOptions(options: StudioAudioOptions): void;
     onError(f: (e: ErrorObject) => void): void;
-    private dbg;
+    dbg(value: any): void;
 }

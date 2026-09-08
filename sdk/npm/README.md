@@ -25,15 +25,26 @@ Experience flawless audio with our real-time AI-powered noise suppression soluti
 ## Features
 
 - Real-time AI-powered noise suppression
-- Studio Sound - audio enhancement with Equalizer, Compressor, Noise Gate, De-Esser, Auto Gain Control, Brickwall Limiter, Metrics
+- Studio Sound - optional audio enhancement: Auto Gain Control, Noise Gate, Equalizer, Compressor, De-Esser, Brickwall Limiter, Metrics
+- Adaptive jitter buffer with selectable latency policy
 - Compatible with all major browsers
 - High performance leveraging WebAssembly
 - Multiple presets tailored for various hardware and use cases, balancing speed and quality
 - Supports sample rates: 16K, 32K, 44.1K, 48K
 - Simple and seamless integration
 
+## Presets
+
+| Preset | Sample rates | Notes |
+|---|---|---|
+| `speed` | 16000 | **Recommended.** Good quality at a fraction of the CPU cost. The headroom it leaves makes buffer underruns far less likely, which matters most on mobile and on loaded machines. |
+| `balanced` | 32000, 44100, 48000 | Higher quality, noticeably heavier. |
+| `quality` | 16000 | Highest quality, heaviest. Requires the ONNX runtime wasm files. |
+
+`speed` and `balanced` require WebAssembly SIMD support; `quality` does not.
+
 ## Studio Sound
- - [Check out more details](docs/Studio-Sound.md)
+ - [Check out more details](https://github.com/EffectsSDK/audio-effects-sdk-web/blob/main/docs/Studio-Sound.md)
 
 ## Trial Evaluation
 
@@ -55,16 +66,16 @@ import { atsvb } from 'audio-effects-sdk';
 let sdk = new atsvb('{CustomerID}');
 
 sdk.config({
-  //default preset
-  preset: 'balanced',
+  //default preset ('speed' is recommended, see Presets below)
+  preset: 'speed',
   //default sample rate for processing
-  sample_rate: 32000,
+  sample_rate: 16000,
   //path to folder with models subfolder
   sdk_url: 'https://effectssdk.ai/sdk/audio/',
   //path to wasm files
   wasmPaths: {
-      "ort-wasm.wasm": "https://effectssdk.ai/sdk/audio/dev/{VERSION}/ort-wasm.wasm",
-      "ort-wasm-simd.wasm": "https://effectssdk.ai/sdk/audio/dev/{VERSION}/ort-wasm-simd.wasm"
+      "ort-wasm.wasm": "https://effectssdk.ai/sdk/audio/dev/{SDK_VERSION}/ort-wasm.wasm",
+      "ort-wasm-simd.wasm": "https://effectssdk.ai/sdk/audio/dev/{SDK_VERSION}/ort-wasm-simd.wasm"
   },
 });
 
@@ -74,7 +85,7 @@ sdk.preload();
 ## Script Tag
 
 ```html
-<script crossorigin="anonymous" src="https://effectssdk.ai/sdk/audio/dev/{VERSION}/atsvb-web.js"></script>
+<script crossorigin="anonymous" src="https://effectssdk.ai/sdk/audio/dev/{SDK_VERSION}/atsvb-web.js"></script>
 ```
 
 Usage of script tag instance:
@@ -82,8 +93,8 @@ Usage of script tag instance:
 const sdk = new window.atsvb('{CUSTOMER_ID}');
 
 sdk.config({
-    preset: 'balanced',
-    sample_rate: 32000
+    preset: 'speed',
+    sample_rate: 16000
 });
 
 sdk.preload();
@@ -95,8 +106,8 @@ sdk.preload();
 const sdk = new window.atsvb('{CUSTOMER_ID}');
 
 sdk.config({
-    preset: 'balanced',
-    sample_rate: 32000
+    preset: 'speed',
+    sample_rate: 16000
 });
 sdk.preload();
 
@@ -131,7 +142,48 @@ window.addEventListener('load', function () {
 
 
 
+## Configuration
+
+```javascript
+sdk.config({
+    // denoise model and the rate it runs at
+    preset: 'speed',
+    sample_rate: 16000,
+
+    // latency policy: 'auto' | 'low' | 'stable'
+    // 'auto' starts low and backs off after underruns, 'stable' keeps more slack
+    latency_mode: 'auto',
+
+    // AudioContext rate; 0 (default) lets the browser choose. Setting it to match
+    // your encoder (48000 for Opus) avoids a resampling step on the output track.
+    // Must be set before the input stream is attached.
+    context_sample_rate: 0,
+
+    // LSNR-based stage skipping for the wasm presets, saves CPU on clean frames
+    denoise_stages: { enabled: false },
+});
+```
+
+See [Level Control and Latency](https://github.com/EffectsSDK/audio-effects-sdk-web/blob/main/docs/Levels-and-Latency.md) for how to choose these
+in a real application, including what to do when the browser refuses to hand over
+control of its own gain control.
+
+## Runtime and Diagnostics API
+
+```javascript
+sdk.isRunning();            // is processing active
+sdk.getLatencyMs();         // current end-to-end pipeline latency
+sdk.getInputAudioTrack();   // capture track in use - getSettings() shows what the browser applied
+sdk.getRequiredModels();    // model files this version needs, and the URLs it will fetch
+
+sdk.enableDebugStats(true);
+sdk.onDebugStats((s) => console.log(s));       // clipping, limiter hits, underruns, pipeline gain
+sdk.getSpeedupDebugInfo();                     // jitter buffer state, latency split, sample rates
+sdk.onStudioAudioMetrics((m) => console.log(m)); // output peak/RMS in dBFS
+```
+
 ## Documentation
 - [API Reference](https://effectssdk.ai/sdk/audio/docs/classes/atsvb.html)
-- [Technical Details](docs/Technical-Details.md)
-- [Self Hosted Assets](docs/Self-Hosted-Assets.md)
+- [Technical Details](https://github.com/EffectsSDK/audio-effects-sdk-web/blob/main/docs/Technical-Details.md)
+- [Level Control and Latency](https://github.com/EffectsSDK/audio-effects-sdk-web/blob/main/docs/Levels-and-Latency.md)
+- [Self Hosted Assets](https://github.com/EffectsSDK/audio-effects-sdk-web/blob/main/docs/Self-Hosted-Assets.md)

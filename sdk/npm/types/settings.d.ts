@@ -5,9 +5,17 @@ export declare class Settings {
     static SDK_URL: string;
     static PRESET: ModelType;
     static SAMPLE_RATE: number;
+    static CONTEXT_SAMPLE_RATE: number;
     static PROCESSING_CHUNK_MS: number;
+    static LATENCY_MODE: LatencyMode;
     static CUSTOMER_ID: string;
     static PROCESSOR_TYPE: ProcessorType;
+}
+export interface DenoiseStagesOptions {
+    enabled: boolean;
+    noiseOnlyLsnrDb?: number;
+    skipDfLsnrDb?: number;
+    bypassLsnrDb?: number;
 }
 export interface Config {
     version: string;
@@ -15,6 +23,7 @@ export interface Config {
     apiUrl: string;
     preset: ModelType;
     sampleRate: number;
+    contextSampleRate: number;
     customerID: string;
     sdkUrl: string;
     currentSrc: string | undefined;
@@ -26,6 +35,8 @@ export interface Config {
     };
     cacheModels: boolean;
     processingChunk: number;
+    latencyMode: LatencyMode;
+    denoiseStages: DenoiseStagesOptions | null;
     workletPath: string;
     workerPath: string;
     processorType: ProcessorType;
@@ -37,12 +48,15 @@ export declare class DefaultConfig {
     static API_URL: string;
     static PRESET: ModelType;
     static SAMPLE_RATE: number;
+    static CONTEXT_SAMPLE_RATE: number;
     static CUSTOMER_ID: string;
     static SDK_URL: string;
     static PROXY: boolean;
     static CACHE_MODELS: boolean;
     static CURRENT_SRC: string | undefined;
     static PROCESSING_CHUNK_MS: number;
+    static LATENCY_MODE: LatencyMode;
+    static DENOISE_STAGES: DenoiseStagesOptions | null;
     static WASM_PATHS: {
         [name in string]: string;
     };
@@ -63,3 +77,4 @@ export declare class DefaultConfig {
 }
 export declare type ModelType = "speed" | "balanced" | "quality";
 export declare type ProcessorType = "worklet" | "buffer";
+export declare type LatencyMode = "auto" | "low" | "stable";
