@@ -22,6 +22,18 @@ Experience flawless audio with our real-time AI-powered noise suppression soluti
 - [Live Demo for Audio Post-Processing](https://effectssdk.ai/sdk/audio/dev/audio-file-demo.html)
 - [Live Demo for Video Post-Processing](https://effectssdk.ai/sdk/audio/dev/video-file-demo.html)
 
+## Integrating with AI Assistants (LLMs)
+
+Using Claude, ChatGPT, Cursor, Copilot or another coding assistant? Point it at our LLM integration guide:
+
+**[llms.txt](https://effectssdk.ai/sdk/audio/dev/llms.txt)** - `https://effectssdk.ai/sdk/audio/dev/llms.txt`
+
+It contains the full API, configuration options, presets, error codes, integration rules and ready-to-use examples, so the assistant can integrate the SDK correctly on the first try. Example prompt:
+
+```text
+Read https://effectssdk.ai/sdk/audio/dev/llms.txt and add Audio Effects SDK noise suppression to my app's microphone track.
+```
+
 ## Features
 
 - Real-time AI-powered noise suppression
@@ -226,6 +238,7 @@ sdk.onStudioAudioMetrics((m) => console.log(m)); // output peak/RMS in dBFS
 
 ## Documentation
 - [API Reference](https://effectssdk.ai/sdk/audio/docs/classes/atsvb.html)
+- [LLM Integration Guide (llms.txt)](https://effectssdk.ai/sdk/audio/dev/llms.txt)
 - [Technical Details](docs/Technical-Details.md)
 - [Level Control and Latency](docs/Levels-and-Latency.md)
 - [Self Hosted Assets](docs/Self-Hosted-Assets.md)
